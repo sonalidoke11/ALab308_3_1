@@ -1,22 +1,24 @@
+// below code to display fizz buzz according to condition
 console.log(" ")
 console.log("============= Print fizz, buzz=============");
 
 let Counter=0;
 for (Counter=0; Counter<=100; Counter++ ){
 
-    if((Counter % 3) == 0 && (Counter % 5) == 0){
+    if((Counter % 3) == 0 && (Counter % 5) == 0){ // first check whether both conditions true?
         console.log("Fizz Buzz");
-    }else if((Counter % 3) == 0){
+    }else if((Counter % 3) == 0){ // if both are not true whether this one?
         console.log("Fizz");
-    }else if((Counter % 5) == 0){
+    }else if((Counter % 5) == 0){ //if not above two true, whether this is true?
         console.log("Buzz");
     }else{
-        console.log(Counter);
+        console.log(Counter);     //if all conditions fails display number
     }
 }
 
+
 console.log(" ")
-console.log("============= FInd NExt Prime number==================");
+console.log("============= Find Next Prime number==================");
 
 function isPrime(n) 
 { 
@@ -52,30 +54,74 @@ function nextPrime(N)
 } 
 
 
-	let N = parseInt(prompt("Enter a positive number: "));   // Take input from user
-    
-    let nextPrimeNum = nextPrime(N)  // Calling nextPrime function with user input value
+    let N = 89;
+    let nextPrimeNum = nextPrime(N)  // Calling nextPrime function
 
 	console.log('Next Prime Number after ' +N+ ' is ' +nextPrimeNum); 
-
-
+                                 
 
 
 console.log(" ")
+
 console.log("===================== Feeling Loopy ================= ")
+console.log("===================== First solution ================= ")
+
+
+/****  FIRST OPTION :     this below first code is just spliting string with line delimiter '\n' and creating array element as per function property, then iterating through for loop to display array elements */
 
 
 let str ="Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232"
 
+str = str. replace(/,/g, ", "); // Repacing delimiter comma(,) with some space for better visibility
 
-let delimiter = ',';  
-let newLine = '\n';  
-let elementsWithoutComma = str.split(delimiter);  
-let elementsWithoutNewLine1 = str.split(newLine);
+let newLine_delimiter = '\n';   // declaring new line delimiter
+let elementsWithoutDelimiter = str.split(newLine_delimiter);   //spliting string with newline delimiter to create array
 
+// iterating ewly created array with for loop to display array elements which are created by newline delimiter
+for(iteration=0; iteration < elementsWithoutDelimiter.length; iteration++){
 
-for(iteration=0; iteration<elementsWithoutNewLine1.length; iteration++){
-    console.log(elementsWithoutNewLine1[iteration])
+    console.log(elementsWithoutDelimiter[iteration])
+
 }
+console.log(" ");
+console.log(" ");
 
-//// this code is just simple by spliting strings without giving more time.
+
+
+/***  SECOND OPTION :       */
+
+
+console.log("===================== Second solution ================= ")
+originalString = "Index,Mass (kg),Spring 1 (m),Spring 2 (m)\n1,0.00,0.050,0.050\n2,0.49,0.066,0.066\n3,0.98,0.087,0.080\n4,1.47,0.116,0.108\n5,1.96,0.142,0.138\n6,2.45,0.166,0.158\n7,2.94,0.193,0.174\n8,3.43,0.204,0.192\n9,3.92,0.226,0.205\n10,4.41,0.238,0.232";
+
+// Below code converts the given string to array and all data will be stored as array element in separatedArray
+separatedArray = [];
+let previousIndex = 0;
+for (i = 0; i < originalString.length; i++) {
+
+    // Check the character for a comma
+    if (originalString[i] == ",") {
+    
+        // Split the string from the last index to the comma
+        separated = originalString.slice(previousIndex, i);
+        separatedArray.push(separated);
+
+        previousIndex = i + 1;    // Update the index of the last string
+    }
+}
+separatedArray.push(originalString.slice(previousIndex, i));
+
+
+// below code will iterate through for loop for separatedArray[] and check for new line delimiter , if found print next data on new line.
+let array = [];
+for(x=0; x<separatedArray.length; x++){
+        if(!(separatedArray[x].includes('\n'))){
+            array.push(separatedArray[x]);
+        }else{
+            var arrayy = separatedArray[x].split('\n'),  a = arrayy[0], b = arrayy[1];
+            array.push(arrayy[0]);
+            console.log(array);
+            array = [];
+            array.push(arrayy[1]);
+        }
+}
